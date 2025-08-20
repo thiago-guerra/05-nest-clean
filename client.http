@@ -17,6 +17,12 @@ POST {{{{baseUrl}}}}/sessions
 Content-Type: application/json
 
 {
-    "email": "thsilva@yopmail.com",
+    "email": "eduarda@yopmail.com",
     "password": "123456"
 }
+
+###
+# @name create_question
+POST {{{{baseUrl}}}}/questions
+Content-Type: application/json
+
