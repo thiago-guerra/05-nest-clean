@@ -1,0 +1,1 @@
+Para executar os testes em vitest, é necessário incluir o "type": "module" no package.json
