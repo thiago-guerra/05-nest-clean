@@ -26,7 +26,6 @@ export class CreateQuestionsController {
     @CurrentUser() user: UserPayload,
     @Body(zodValidationPipe) body: CreateQuestionBodySchema,
   ) {
-    console.log(body)
     const { title, content } = body
     const userId = user.sub
 
