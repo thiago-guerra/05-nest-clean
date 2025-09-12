@@ -3,8 +3,8 @@ import { CurrentUser } from '@/auth/current-user-decorator'
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard'
 import { UserPayload } from '@/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe'
-import { PrismaService } from '@/prisma/prisma.service'
 import z from 'zod'
+import { CreateQuestionUseCases } from '@/domain/forum/application/use-cases/create-question'
 
 const createQuestionBodySchema = z.object({
   title: z.string(),
@@ -18,7 +18,7 @@ type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class CreateQuestionsController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly createQuestion: CreateQuestionUseCases) {}
 
   @Post()
   @HttpCode(201)
@@ -29,26 +29,11 @@ export class CreateQuestionsController {
     const { title, content } = body
     const userId = user.sub
 
-    const slug = this.stringToSlug(title)
-
-    await this.prisma.question.create({
-      data: {
-        title,
-        content,
-        authorId: userId,
-        slug,
-      },
+    await this.createQuestion.execute({
+      title,
+      content,
+      authorId: userId,
+      attachmentsIds: [],
     })
-  }
-
-  private stringToSlug(text: string): string {
-    return text
-      .toLowerCase() // tudo minúsculo
-      .normalize('NFD') // separa caracteres acentuados
-      .replace(/[\u0300-\u036f]/g, '') // remove acentos
-      .replace(/[^a-z0-9\s-]/g, '') // remove caracteres especiais
-      .trim() // remove espaços extras no início e fim
-      .replace(/\s+/g, '-') // substitui espaços por hífens
-      .replace(/-+/g, '-') // evita múltiplos hífens consecutivos
   }
 }

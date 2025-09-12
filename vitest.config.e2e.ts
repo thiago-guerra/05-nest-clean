@@ -16,6 +16,7 @@ export default defineConfig({
       '@/pipes': path.resolve(__dirname, './src/pipes'),
       '@/prisma': path.resolve(__dirname, './src/prisma'),
       '@/auth': path.resolve(__dirname, './src/auth'),
+      '@/database': path.resolve(__dirname, './src/database'),
     },
   },
 })
