@@ -28,8 +28,7 @@ export class AuthenticateStudentUseCases {
     email,
     password,
   }: IAuthenticateStudentUseCases): Promise<IAuthenticateStudentUseCasesResponse> {
-    const student = await this.studentRepository.findById(email)
-
+    const student = await this.studentRepository.findByEmail(email)
     if (!student) return left(new WrongCredentialsError())
 
     const passwordCorrect = await this.hashCompare.compare(

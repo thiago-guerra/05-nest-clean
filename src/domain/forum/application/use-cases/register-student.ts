@@ -29,7 +29,7 @@ export class RegisterStudentUseCases {
     email,
     password,
   }: IRegisterStudentUseCases): Promise<IRegisterStudentUseCasesResponse> {
-    const userWithSameEmail = await this.studentRepository.findById(email)
+    const userWithSameEmail = await this.studentRepository.findByEmail(email)
 
     if (userWithSameEmail) return left(new StudentAlreadyExistsError(email))
 

@@ -1,7 +1,7 @@
 import { BaseEntity } from '@/core/entities/baseEntity'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 
-interface StudentProps {
+export interface StudentProps {
   name: string
   email: string
   password: string
