@@ -11,6 +11,7 @@ import { CreateQuestionUseCases } from './domain/forum/application/use-cases/cre
 import { FetchRecentQuestionsUseCases } from './domain/forum/application/use-cases/fetch-recent-questions'
 import { AuthenticateStudentUseCases } from './domain/forum/application/use-cases/authenticate-student'
 import { CryptographyModule } from './cryptography/cryptography.module'
+import { RegisterStudentUseCases } from './domain/forum/application/use-cases/register-student'
 @Global()
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CryptographyModule } from './cryptography/cryptography.module'
     CreateQuestionUseCases,
     FetchRecentQuestionsUseCases,
     AuthenticateStudentUseCases,
+    RegisterStudentUseCases,
   ],
 })
 export class AppModule {}
