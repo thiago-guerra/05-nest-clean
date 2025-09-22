@@ -9,6 +9,8 @@ import { FetchRecentQuestionsController } from './controllers/fetch-recent-quest
 import { DatabaseModule } from './database/database.module'
 import { CreateQuestionUseCases } from './domain/forum/application/use-cases/create-question'
 import { FetchRecentQuestionsUseCases } from './domain/forum/application/use-cases/fetch-recent-questions'
+import { AuthenticateStudentUseCases } from './domain/forum/application/use-cases/authenticate-student'
+import { CryptographyModule } from './cryptography/cryptography.module'
 @Global()
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { FetchRecentQuestionsUseCases } from './domain/forum/application/use-cas
     }),
     AuthModule,
     DatabaseModule,
+    CryptographyModule,
   ],
   controllers: [
     CreateAccountController,
@@ -25,6 +28,10 @@ import { FetchRecentQuestionsUseCases } from './domain/forum/application/use-cas
     CreateQuestionsController,
     FetchRecentQuestionsController,
   ],
-  providers: [CreateQuestionUseCases, FetchRecentQuestionsUseCases],
+  providers: [
+    CreateQuestionUseCases,
+    FetchRecentQuestionsUseCases,
+    AuthenticateStudentUseCases,
+  ],
 })
 export class AppModule {}
